@@ -1,21 +1,16 @@
-import SkeletonItem from "./SkeletonItem";
-import { MyFlex, WrapperChips, WrapperSkeleton } from "./styles";
+import { StylesSkeleton, WrapperSkeleton } from "./styles";
 
-export default function Skeleton() {
+interface PropsSkeleton {
+  children: JSX.Element;
+  background?: string;
+}
+export default function Skeleton({
+  children,
+  background = "white",
+}: PropsSkeleton) {
   return (
-    <WrapperSkeleton>
-      <WrapperChips>
-        <SkeletonItem width={80} height={50} />
-        <SkeletonItem width={80} height={50} />
-        <SkeletonItem width={80} height={50} />
-        <SkeletonItem width={80} height={50} />
-        <SkeletonItem width={80} height={50} />
-      </WrapperChips>
-      <MyFlex column>
-        <SkeletonItem width={"100%"} height={50} />
-        <SkeletonItem width={"100%"} height={400} />
-        <SkeletonItem width={"100%"} height={400} />
-      </MyFlex>
+    <WrapperSkeleton style={{ background }}>
+      <StylesSkeleton>{children}</StylesSkeleton>
     </WrapperSkeleton>
   );
 }

@@ -1,14 +1,15 @@
-import { Chips, Wrapper } from "./styles";
+import { Item } from "./styles";
 
-interface ChipsProps {
+interface ItemProps {
   width: number | string;
-  height: number;
+  height: number | string;
+  background?: string;
 }
 
-export default function SkeletonItem({ width, height }: ChipsProps) {
-  return (
-    <Wrapper>
-      <Chips style={{ width, height }} />
-    </Wrapper>
-  );
+export default function SkeletonItem({
+  width,
+  height,
+  background = "whitesmoke",
+}: ItemProps) {
+  return <Item style={{ width, height, background }} />;
 }

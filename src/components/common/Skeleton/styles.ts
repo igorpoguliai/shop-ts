@@ -1,21 +1,37 @@
 import styled from "styled-components";
-import { Flex as _Flex } from "../styles";
 
-export const WrapperSkeleton = styled.div`
+export const WrapperSkeleton = styled.div<{ style: Object }>`
   width: 100%;
   height: 100vh;
-  background: #e5e5e5;
-  padding: 18px 15px 0;
-  overflow: hidden;
   position: relative;
 `;
 
-export const WrapperChips = styled.div`
-  display: flex;
-  gap: 12px;
-  padding-bottom: 12px;
-`;
+export const StylesSkeleton = styled.div`
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 10px;
+    background: linear-gradient(
+      to right,
+      #e2e2e2 25%,
+      #d5d5d5 50%,
+      #e2e2e2 100%
+    );
+    animation-name: gradient-animation;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    filter: blur(5px);
+  }
 
-export const MyFlex = styled(_Flex)`
-  gap: 24px;
+  @keyframes gradient-animation {
+    from {
+      left: 0%;
+    }
+    to {
+      left: 100%;
+    }
+  }
 `;

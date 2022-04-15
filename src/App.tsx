@@ -1,10 +1,10 @@
-import Skeleton from "./components/common/Skeleton";
+import MyLoader from "./components/MyLoader";
 import { Container } from "./styles";
 
 export default function App() {
   return (
     <Container>
-      <Skeleton />
+      <MyLoader />
     </Container>
   );
 }

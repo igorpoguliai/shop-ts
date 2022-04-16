@@ -5,7 +5,7 @@ import { WrapperChips, MyFlex, Container } from "./styles";
 export default function MyLoader() {
   return (
     <Skeleton background={"#E5E5E5"}>
-      <>
+      <Container>
         <WrapperChips>
           <SkeletonItem width={80} height={50} background={"#e8e8e8"} />
           <SkeletonItem width={80} height={50} background={"#e8e8e8"} />
@@ -18,7 +18,7 @@ export default function MyLoader() {
           <SkeletonItem width={"100%"} height={400} background={"#e8e8e8"} />
           <SkeletonItem width={"100%"} height={400} background={"#e8e8e8"} />
         </MyFlex>
-      </>
+      </Container>
     </Skeleton>
   );
 }

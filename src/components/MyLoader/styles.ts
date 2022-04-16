@@ -12,6 +12,15 @@ export const MyFlex = styled(_Flex)`
 `;
 
 export const Container = styled.div`
-  max-width: 400px;
-  overflow: hidden;
+  max-width: 430px;
+
+  && {
+    padding: 80px 15px 0;
+  }
+
+  .kMAnlg {
+    position: absolute;
+    top: 18px;
+    left: 15px;
+  }
 `;

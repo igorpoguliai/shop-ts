@@ -4,7 +4,7 @@ import { WrapperChips, MyFlex, Container } from "./styles";
 
 export default function MyLoader() {
   return (
-    <Skeleton background={"#E5E5E5"}>
+    <Skeleton background={"#F1F5FB"}>
       <Container>
         <WrapperChips>
           <SkeletonItem width={80} height={50} background={"#e8e8e8"} />

@@ -1,4 +1,4 @@
-import { StylesSkeleton, WrapperSkeleton } from "./styles";
+import { WrapperSkeleton, Shimmer } from "./styles";
 
 interface PropsSkeleton {
   children: JSX.Element;
@@ -10,7 +10,8 @@ export default function Skeleton({
 }: PropsSkeleton) {
   return (
     <WrapperSkeleton style={{ background }}>
-      <StylesSkeleton>{children}</StylesSkeleton>
+      {children}
+      <Shimmer />
     </WrapperSkeleton>
   );
 }

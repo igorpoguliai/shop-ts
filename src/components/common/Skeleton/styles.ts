@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 export const WrapperSkeleton = styled.div<{ style: Object }>`
   width: 100%;
@@ -7,34 +7,39 @@ export const WrapperSkeleton = styled.div<{ style: Object }>`
   overflow: hidden;
 `;
 
-export const StylesSkeleton = styled.div`
-  &::before {
-    content: "";
-    position: absolute;
-    z-index: 5;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 10px;
-    background: linear-gradient(
-      to right,
-      #e8e8e8 25%,
-      #f1f1f1 50%,
-      #f1f1f1 75%,
-      #e8e8e8 100%
-    );
-    animation-name: gradient-animation;
-    animation-duration: 2s;
-    animation-iteration-count: infinite;
-    filter: blur(5px);
+const animation = keyframes`
+  0% {
+    transform: translateX(-150%);
   }
+  50% {
+    transform: translateX(-60%);
+  }
+  100% {
+    transform: translateX(150%);
+  }
+`;
 
-  @keyframes gradient-animation {
-    from {
-      left: 0%;
-    }
-    to {
-      left: 100%;
-    }
+export const Shimmer = styled.div`
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+
+  &::after {
+    content: "";
+    width: 60%;
+    display: block;
+    height: 100%;
+    opacity: 0.6;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      #f1f5fb 50%,
+      transparent 100%
+    );
+    transform: skewX(-20deg);
+    animation: ${animation} 1s linear infinite;
   }
 `;

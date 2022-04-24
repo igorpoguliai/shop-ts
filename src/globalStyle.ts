@@ -4,6 +4,7 @@ const GlobalStyle = createGlobalStyle`
 * {
   box-sizing: border-box;
 }
+
 html,
 body,
 div,
@@ -127,6 +128,29 @@ q:after {
 table {
   border-collapse: collapse;
   border-spacing: 0;
+}
+
+:root {
+  --background-color: #f1f5fb;
+  --accent-color: #5BD6A4;
+  --border-color-active: #56C397;
+  --border-color: #E8E8E8;
+  --text-color: #BDBDBD;
+  --second-color: #FFFFFF;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+}
+
+input, button {
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
 }
 `;
 

@@ -1,22 +1,22 @@
 import Skeleton from "../common/Skeleton";
 import SkeletonItem from "../common/Skeleton/SkeletonItem";
-import { WrapperChips, MyFlex, Container } from "./styles";
+import { ChipsWrapper, MyFlex, Container } from "./styles";
 
 export default function MyLoader() {
   return (
-    <Skeleton background={"#F1F5FB"}>
+    <Skeleton background={"#F1F5FB"} itemBackground={"#e8e8e8"}>
       <Container>
-        <WrapperChips>
-          <SkeletonItem width={80} height={50} background={"#e8e8e8"} />
-          <SkeletonItem width={80} height={50} background={"#e8e8e8"} />
-          <SkeletonItem width={80} height={50} background={"#e8e8e8"} />
-          <SkeletonItem width={80} height={50} background={"#e8e8e8"} />
-          <SkeletonItem width={80} height={50} background={"#e8e8e8"} />
-        </WrapperChips>
+        <ChipsWrapper>
+          <SkeletonItem width={80} height={50} />
+          <SkeletonItem width={80} height={50} />
+          <SkeletonItem width={80} height={50} />
+          <SkeletonItem width={80} height={50} />
+          <SkeletonItem width={80} height={50} />
+        </ChipsWrapper>
         <MyFlex column>
-          <SkeletonItem width={"100%"} height={50} background={"#e8e8e8"} />
-          <SkeletonItem width={"100%"} height={400} background={"#e8e8e8"} />
-          <SkeletonItem width={"100%"} height={400} background={"#e8e8e8"} />
+          <SkeletonItem width={"100%"} height={50} />
+          <SkeletonItem width={"100%"} height={400} />
+          <SkeletonItem width={"100%"} height={400} />
         </MyFlex>
       </Container>
     </Skeleton>

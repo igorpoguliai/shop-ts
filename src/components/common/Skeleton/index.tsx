@@ -1,17 +1,22 @@
-import { WrapperSkeleton, Shimmer } from "./styles";
+import { SkeletonWrapper, Shimmer } from "./styles";
 
-interface PropsSkeleton {
+interface SkeletonProps {
   children: JSX.Element;
   background?: string;
+  itemBackground?: string;
 }
 export default function Skeleton({
   children,
   background = "white",
-}: PropsSkeleton) {
+  itemBackground = "whitesmoke",
+}: SkeletonProps) {
   return (
-    <WrapperSkeleton style={{ background }}>
+    <SkeletonWrapper
+      SkeletonBackground={background}
+      itemBackground={itemBackground}
+    >
       {children}
-      <Shimmer />
-    </WrapperSkeleton>
+      <Shimmer ShimmerBackground={background} />
+    </SkeletonWrapper>
   );
 }

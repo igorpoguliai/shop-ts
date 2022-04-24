@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const InputStyles = styled.input`
   width: 100%;
   height: 50px;
-  border: none;
   border-radius: 8px;
   outline: none;
   padding-left: 44px;
@@ -11,22 +10,22 @@ export const InputStyles = styled.input`
 
   &:focus {
     border: 2px solid var(--border-color-active);
+
+    & + svg {
+      left: 16px;
+      opacity: 0;
+    }
   }
 `;
 
 export const InputWrapper = styled.div`
   position: relative;
+  overflow: hidden;
+  transition: all 3s;
 
   & svg {
     position: absolute;
     top: 1rem;
     left: 16px;
-  }
-
-  &:hover {
-    svg {
-      transform: scale(1.1);
-      transition: all 1s;
-    }
   }
 `;

@@ -1,18 +1,23 @@
 import { InputWrapper, InputStyles } from "./styles";
-import { ReactComponent as LoupeIcon } from "./icons/loupe.svg";
 import { ChangeEventHandler } from "react";
 
-interface PropsInput {
+interface InputProps {
   text: string;
   onChange: ChangeEventHandler<HTMLInputElement> | undefined;
-  value: string | number;
+  value: string;
+  icon: React.ReactNode;
 }
 
-export default function Input({ text, onChange, value }: PropsInput) {
+export default function Input({
+  text,
+  onChange,
+  value,
+  icon: Icon,
+}: InputProps) {
   return (
     <InputWrapper>
       <InputStyles onChange={onChange} value={value} placeholder={text} />
-      <LoupeIcon />
+      {Icon && <Icon />}
     </InputWrapper>
   );
 }

@@ -4,7 +4,8 @@ import Card from "../Card";
 import Chips from "../common/Chips";
 import Input from "../common/Input";
 import { ChipsWrapper, ProductWrapper } from "./styles";
-import MyLoader from "../MyLoader";
+import MyLoader from "../ProductsSkeleton";
+import { ReactComponent as LoupeIcon } from "./icons/loupe.svg";
 
 export interface ProductsData {
   category: string;
@@ -18,7 +19,7 @@ export interface ProductsData {
 export default function Cards() {
   const [products, setProducts] = useState<Array<ProductsData>>([]);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
-  const [value, setValue] = useState<string | number>("");
+  const [value, setValue] = useState<string>("");
 
   useEffect(() => {
     getRequest().then(({ items }) => setProducts(items));
@@ -64,6 +65,7 @@ export default function Cards() {
               onChange={handleChangeInput}
               value={value}
               text={"Введите артикул..."}
+              icon={LoupeIcon}
             />
             {filterProductToCategory.map((product) => (
               <Card key={product.name} product={product} />

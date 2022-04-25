@@ -9,24 +9,28 @@ import {
 import { Flex } from "../common/styles";
 import { ReactComponent as EyeIcon } from "./icons/eye.svg";
 import Chips from "../common/Chips";
-import { ProductsData } from "../Cards";
+import { IProduct } from "../Cards";
 import { useState } from "react";
 
 interface CardProps {
-  product: ProductsData;
+  product: IProduct;
 }
 
 export default function Card({ product }: CardProps) {
   const [activeSizeIdx, setActiveSizeIdx] = useState(0);
   const activeSizeInfo = product.sizestock[activeSizeIdx];
 
+  function isImageSrcCorrect(src: string) {
+    return src.includes("jpg");
+  }
+
   return (
     <>
       <Wrapper>
         <span>{product.name}</span>
         <span>{product.category}</span>
-        {product.img ? (
-          <Image src={product.img} alt="product" />
+        {product.img && isImageSrcCorrect(product.img) ? (
+          <Image src={product.img} loading="lazy" alt="product" />
         ) : (
           <EmptyImage>
             <EyeIcon />
@@ -48,16 +52,16 @@ export default function Card({ product }: CardProps) {
       <Description>{product.description}</Description>
       <BlockInfo between>
         <Flex column center>
-          <span>Стоимость</span>
+          <span>Ціна</span>
           <span>{product.price} ₴</span>
         </Flex>
         <Flex column center>
-          <span>В наличии</span>
-          <span>{activeSizeInfo?.stock} шт.</span>
+          <span>В наявності</span>
+          <span>{activeSizeInfo?.stock || 0} шт.</span>
         </Flex>
         <Flex column center>
           <span>Броней</span>
-          <span>{activeSizeInfo?.reserv} шт.</span>
+          <span>{activeSizeInfo?.reserv || 0} шт.</span>
         </Flex>
       </BlockInfo>
     </>

@@ -12,18 +12,14 @@ export const ProductWrapper = styled.div`
   }
 
   && {
-    padding: 12px 15px 70px;
+    padding: 0 15px 70px;
   }
 `;
 
 export const ChipsWrapper = styled.div`
-  font-family: "Inter", sans-serif;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 19px;
   display: flex;
   gap: 12px;
   overflow: auto;
-  background: #f1f5fb;
-  padding: 18px 0 0 16px;
+  background: var(--background-color);
+  padding: 18px 15px 12px;
 `;

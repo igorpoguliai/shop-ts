@@ -1,5 +1,5 @@
 import { MouseEventHandler } from "react";
-import { ChipsStyles } from "./styles";
+import { Chip } from "./styles";
 
 interface ChipsProps {
   children: string;
@@ -9,8 +9,8 @@ interface ChipsProps {
 
 export default function Chips({ children, isActive, handleClick }: ChipsProps) {
   return (
-    <ChipsStyles onClick={handleClick} isActive={isActive}>
+    <Chip onClick={handleClick} isActive={isActive}>
       {children}
-    </ChipsStyles>
+    </Chip>
   );
 }

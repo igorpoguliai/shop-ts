@@ -7,12 +7,14 @@ export const InputStyles = styled.input`
   outline: none;
   padding-left: 44px;
   border: 1px solid var(--border-color);
+  transition: all 0.5s;
 
   &:focus {
     border: 2px solid var(--border-color-active);
+    padding-left: 16px;
 
     & + svg {
-      left: 16px;
+      left: -20px;
       opacity: 0;
     }
   }
@@ -21,11 +23,11 @@ export const InputStyles = styled.input`
 export const InputWrapper = styled.div`
   position: relative;
   overflow: hidden;
-  transition: all 3s;
 
   & svg {
     position: absolute;
     top: 1rem;
     left: 16px;
+    transition: all 0.5s;
   }
 `;

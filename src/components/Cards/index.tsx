@@ -4,36 +4,43 @@ import Card from "../Card";
 import Chips from "../common/Chips";
 import Input from "../common/Input";
 import { ChipsWrapper, ProductWrapper } from "./styles";
-import MyLoader from "../ProductsSkeleton";
+import ProductsSkeleton from "../ProductsSkeleton";
 import { ReactComponent as LoupeIcon } from "./icons/loupe.svg";
 
-export interface ProductsData {
+export interface IProduct {
   category: string;
-  sizestock: { size: string; stock: string; reserv: string }[];
+  sizestock: ISize[];
   description: string;
   name: string;
   img: string;
   price: string;
 }
 
+export interface ISize {
+  size: string;
+  stock: string;
+  reserv: string;
+}
+
 export default function Cards() {
-  const [products, setProducts] = useState<Array<ProductsData>>([]);
+  const [products, setProducts] = useState<IProduct[]>([]);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [value, setValue] = useState<string>("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getRequest().then(({ items }) => setProducts(items));
+    setLoading(true);
+    getRequest().then(({ items }) => {
+      setProducts(items);
+      setLoading(false);
+    });
   }, []);
 
   const categories = Array.from(
-    new Set(
-      products
-        .map((product) => product.category)
-        .filter((category) => category !== "")
-    )
+    new Set(products.map((product) => product.category).filter(Boolean))
   );
 
-  const filterProductToCategory = activeCategory
+  const filtredProducts = activeCategory
     ? products.filter((item) => item.category === activeCategory)
     : products;
 
@@ -45,36 +52,32 @@ export default function Cards() {
     setValue(event.target.value);
   }
 
-  return (
+  return loading ? (
+    <ProductsSkeleton />
+  ) : (
     <>
-      {products.length ? (
-        <>
-          <ChipsWrapper>
-            {categories.map((category) => (
-              <Chips
-                key={category}
-                handleClick={() => handleCategoryClick(category)}
-                isActive={category === activeCategory}
-              >
-                {category}
-              </Chips>
-            ))}
-          </ChipsWrapper>
-          <ProductWrapper>
-            <Input
-              onChange={handleChangeInput}
-              value={value}
-              text={"Введите артикул..."}
-              icon={LoupeIcon}
-            />
-            {filterProductToCategory.map((product) => (
-              <Card key={product.name} product={product} />
-            ))}
-          </ProductWrapper>
-        </>
-      ) : (
-        <MyLoader />
-      )}
+      <ChipsWrapper>
+        {categories.map((category) => (
+          <Chips
+            key={category}
+            handleClick={() => handleCategoryClick(category)}
+            isActive={category === activeCategory}
+          >
+            {category}
+          </Chips>
+        ))}
+      </ChipsWrapper>
+      <ProductWrapper>
+        <Input
+          onChange={handleChangeInput}
+          value={value}
+          text={"Введіть артикул..."}
+          Icon={LoupeIcon}
+        />
+        {filtredProducts.map((product) => (
+          <Card key={product.name} product={product} />
+        ))}
+      </ProductWrapper>
     </>
   );
 }

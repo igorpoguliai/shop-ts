@@ -50,6 +50,7 @@ export const Image = styled.img`
 export const ChipsWrapper = styled(_ChipsWrapper)`
   gap: 8px;
   background: var(--second-color);
+  padding: 18px 16px 0;
 `;
 
 export const Description = styled.p`

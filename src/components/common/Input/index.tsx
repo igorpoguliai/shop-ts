@@ -3,17 +3,12 @@ import { ChangeEventHandler } from "react";
 
 interface InputProps {
   text: string;
-  onChange: ChangeEventHandler<HTMLInputElement> | undefined;
+  onChange: ChangeEventHandler<HTMLInputElement>;
   value: string;
-  icon: React.ReactNode;
+  Icon: React.FunctionComponent<React.SVGAttributes<SVGElement>>;
 }
 
-export default function Input({
-  text,
-  onChange,
-  value,
-  icon: Icon,
-}: InputProps) {
+export default function Input({ text, onChange, value, Icon }: InputProps) {
   return (
     <InputWrapper>
       <InputStyles onChange={onChange} value={value} placeholder={text} />

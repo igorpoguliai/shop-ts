@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-export const ChipsStyles = styled.button<{ isActive: boolean }>`
+export const Chip = styled.button<{ isActive: boolean }>`
   background: var(--second-color);
   color: var(--text-color);
   border-radius: 8px;

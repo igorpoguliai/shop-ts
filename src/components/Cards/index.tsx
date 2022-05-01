@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { getRequest } from "../../api";
 import Card from "../Card";
-import Chips from "../common/Chips";
+import Chips, { ChipItemType } from "../common/Chips";
 import Input from "../common/Input";
-import { ChipsWrapper, ProductWrapper } from "./styles";
+import { Container, Message, ProductWrapper } from "./styles";
 import ProductsSkeleton from "../ProductsSkeleton";
 import { ReactComponent as LoupeIcon } from "./icons/loupe.svg";
+import { ReactComponent as EyeIcon } from "../Card/icons/eye.svg";
 
 export interface IProduct {
   category: string;
@@ -16,7 +17,7 @@ export interface IProduct {
   price: string;
 }
 
-export interface ISize {
+interface ISize {
   size: string;
   stock: string;
   reserv: string;
@@ -30,22 +31,44 @@ export default function Cards() {
 
   useEffect(() => {
     setLoading(true);
-    getRequest().then(({ items }) => {
-      setProducts(items);
-      setLoading(false);
-    });
+    getRequest()
+      .then(({ items }) => {
+        setProducts(items);
+        setLoading(false);
+      })
+      .catch((err) => alert(err));
   }, []);
 
-  const categories = Array.from(
-    new Set(products.map((product) => product.category).filter(Boolean))
-  );
+  const categories = useMemo(() => {
+    Array.from(
+      new Set(
+        products
+          .filter((product) => Boolean(product.category))
+          .map((product) => product.category)
+      )
+    );
+  }, [products]);
 
-  const filtredProducts = activeCategory
-    ? products.filter((item) => item.category === activeCategory)
-    : products;
+  const filtredProducts = useMemo(() => {
+    return activeCategory
+      ? products.filter((item) => item.category === activeCategory)
+      : products;
+  }, [categories]);
 
-  function handleCategoryClick(category: string) {
-    setActiveCategory(category === activeCategory ? null : category);
+  const finalProducts = filtredProducts.filter((item) => {
+    if (value === "") {
+      return item;
+    } else if (item.name.includes(value)) {
+      return item;
+    } else {
+      return null;
+    }
+  });
+
+  function handleCategoryClick(item: ChipItemType) {
+    setActiveCategory(
+      item.value === activeCategory ? null : (item.value as string)
+    );
   }
 
   function handleChangeInput(event: React.ChangeEvent<HTMLInputElement>) {
@@ -55,18 +78,15 @@ export default function Cards() {
   return loading ? (
     <ProductsSkeleton />
   ) : (
-    <>
-      <ChipsWrapper>
-        {categories.map((category) => (
-          <Chips
-            key={category}
-            handleClick={() => handleCategoryClick(category)}
-            isActive={category === activeCategory}
-          >
-            {category}
-          </Chips>
-        ))}
-      </ChipsWrapper>
+    <Container>
+      <Chips
+        items={categories.map((category: string) => ({
+          value: category,
+          label: category,
+        }))}
+        activeValue={activeCategory}
+        onClick={handleCategoryClick}
+      />
       <ProductWrapper>
         <Input
           onChange={handleChangeInput}
@@ -74,10 +94,17 @@ export default function Cards() {
           text={"Введіть артикул..."}
           Icon={LoupeIcon}
         />
-        {filtredProducts.map((product) => (
-          <Card key={product.name} product={product} />
-        ))}
+        {finalProducts.length === 0 ? (
+          <Message>
+            <EyeIcon />
+            Товар з таким артикулем не знайдено...
+          </Message>
+        ) : (
+          finalProducts.map((product) => (
+            <Card key={product.name} product={product} />
+          ))
+        )}
       </ProductWrapper>
-    </>
+    </Container>
   );
 }

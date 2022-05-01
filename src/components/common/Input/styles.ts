@@ -9,6 +9,11 @@ export const InputStyles = styled.input`
   border: 1px solid var(--border-color);
   transition: all 0.5s;
 
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+
   &:focus {
     border: 2px solid var(--border-color-active);
     padding-left: 16px;

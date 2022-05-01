@@ -1,16 +1,28 @@
-import { MouseEventHandler } from "react";
-import { Chip } from "./styles";
+import { Chip, ChipsWrapper } from "./styles";
 
-interface ChipsProps {
-  children: string;
-  isActive: boolean;
-  handleClick: MouseEventHandler<HTMLButtonElement>;
+export interface ChipItemType {
+  value: string | number;
+  label: string;
 }
 
-export default function Chips({ children, isActive, handleClick }: ChipsProps) {
+interface ChipsProps {
+  items: ChipItemType[];
+  activeValue: string | number | null;
+  onClick: (item: ChipItemType) => void;
+}
+
+export default function Chips({ items, activeValue, onClick }: ChipsProps) {
   return (
-    <Chip onClick={handleClick} isActive={isActive}>
-      {children}
-    </Chip>
+    <ChipsWrapper>
+      {items.map((item) => (
+        <Chip
+          key={item.value}
+          onClick={() => onClick(item)}
+          isActive={item.value === activeValue}
+        >
+          {item.label}
+        </Chip>
+      ))}
+    </ChipsWrapper>
   );
 }

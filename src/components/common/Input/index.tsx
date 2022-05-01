@@ -11,7 +11,12 @@ interface InputProps {
 export default function Input({ text, onChange, value, Icon }: InputProps) {
   return (
     <InputWrapper>
-      <InputStyles onChange={onChange} value={value} placeholder={text} />
+      <InputStyles
+        type="number"
+        onChange={onChange}
+        value={value}
+        placeholder={text}
+      />
       {Icon && <Icon />}
     </InputWrapper>
   );

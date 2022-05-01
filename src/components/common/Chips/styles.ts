@@ -26,3 +26,10 @@ export const Chip = styled.button<{ isActive: boolean }>`
       }
     `}
 `;
+
+export const ChipsWrapper = styled.div`
+  display: flex;
+  gap: 10px;
+  overflow: auto;
+  padding: 0 15px;
+`;

@@ -1,17 +1,22 @@
 import styled from "styled-components";
-import { ChipsWrapper as _ChipsWrapper } from "../Cards/styles";
 import { Flex as _Flex } from "../common/styles";
+import { ChipsWrapper } from "../common/Chips/styles";
 
-export const Wrapper = styled.div`
+export const CardWrapper = styled.div`
   width: 100%;
   background: var(--second-color);
-  border-radius: 8px 8px 0 0;
-  padding: 16px 16px 0;
-  margin-top: 24px;
+  border-radius: 8px;
+  padding: 16px;
+
+  ${ChipsWrapper} {
+    padding: 18px 0 0;
+  }
+
+  margin: 24px 0 70px;
   display: flex;
   flex-direction: column;
 
-  & span {
+  span {
     color: var(--text-color);
     font-weight: 400;
 
@@ -35,7 +40,7 @@ export const EmptyImage = styled.div`
   flex-direction: column;
   margin-top: 18px;
 
-  & span {
+  span {
     padding-top: 15px;
     font-size: 24px;
     line-height: 29px;
@@ -44,26 +49,30 @@ export const EmptyImage = styled.div`
 
 export const Image = styled.img`
   border-radius: 8px;
-  margin: 18px 0 0;
-`;
-
-export const ChipsWrapper = styled(_ChipsWrapper)`
-  gap: 8px;
-  background: var(--second-color);
-  padding: 18px 16px 0;
+  margin-top: 18px;
 `;
 
 export const Description = styled.p`
-  width: 100%;
-  background: var(--second-color);
-  padding: 18px 16px;
+  padding: 18px 0;
   font-weight: 400;
   color: var(--text-color);
   text-align: center;
 `;
 
 export const BlockInfo = styled(_Flex)`
-  width: 100%;
-  background: var(--second-color);
-  padding: 0 16px 16px;
+  span {
+    &:first-child {
+      color: var(--text-color);
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 19px;
+    }
+
+    &:last-child {
+      color: #3d3d3d;
+      font-weight: 500;
+      font-size: 28px;
+      line-height: 34px;
+    }
+  }
 `;

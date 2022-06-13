@@ -26,7 +26,7 @@ export const ProductWrapper = styled.div`
 
 export const Message = styled.div`
   width: 100%;
-  height: 100vh;
+  height: calc(100vh - 200px);
   color: var(--text-color);
   font-style: italic;
   font-size: 24px;

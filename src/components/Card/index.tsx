@@ -8,7 +8,7 @@ import {
 import { Flex } from "../common/styles";
 import { ReactComponent as EyeIcon } from "./icons/eye.svg";
 import Chips, { ChipItemType } from "../common/Chips";
-import { IProduct } from "../Cards";
+import { IProduct } from "../../interfaces";
 import { useState } from "react";
 
 interface CardProps {

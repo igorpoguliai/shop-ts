@@ -1,12 +1,19 @@
 import { createRoot } from "react-dom/client";
 import App from "./App";
 import GlobalStyle from "./globalStyle";
+import useIsMobile from "./hooks/useIsMobile";
 
 function Index() {
+  const isMobile = useIsMobile();
+
   return (
     <>
       <GlobalStyle />
-      <App />
+      {isMobile ? (
+        <App />
+      ) : (
+        alert("Цей додаток працює тільки на мобільному пристрої ;)")
+      )}
     </>
   );
 }

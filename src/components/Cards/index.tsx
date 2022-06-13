@@ -7,26 +7,12 @@ import { Container, Message, ProductWrapper } from "./styles";
 import ProductsSkeleton from "../ProductsSkeleton";
 import { ReactComponent as LoupeIcon } from "./icons/loupe.svg";
 import { ReactComponent as EyeIcon } from "../Card/icons/eye.svg";
-
-export interface IProduct {
-  category: string;
-  sizestock: ISize[];
-  description: string;
-  name: string;
-  img: string;
-  price: string;
-}
-
-interface ISize {
-  size: string;
-  stock: string;
-  reserv: string;
-}
+import { IProduct } from "../../interfaces";
 
 export default function Cards() {
   const [products, setProducts] = useState<IProduct[]>([]);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
-  const [value, setValue] = useState<string>("");
+  const [value, setValue] = useState("");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -36,11 +22,15 @@ export default function Cards() {
         setProducts(items);
         setLoading(false);
       })
-      .catch((err) => alert(err));
+      .catch((err) =>
+        alert(
+          `${err}\nOops... Перевірте підключення до інтернету або спробуйте оновити цю сторінку`
+        )
+      );
   }, []);
 
   const categories = useMemo(() => {
-    Array.from(
+    return Array.from(
       new Set(
         products
           .filter((product) => Boolean(product.category))
@@ -49,21 +39,23 @@ export default function Cards() {
     );
   }, [products]);
 
-  const filtredProducts = useMemo(() => {
+  const filteredProducts = useMemo(() => {
     return activeCategory
       ? products.filter((item) => item.category === activeCategory)
       : products;
-  }, [categories]);
+  }, [products, activeCategory]);
 
-  const finalProducts = filtredProducts.filter((item) => {
-    if (value === "") {
-      return item;
-    } else if (item.name.includes(value)) {
-      return item;
-    } else {
-      return null;
-    }
-  });
+  const finalProducts = useMemo(() => {
+    return filteredProducts.filter((item) => {
+      if (value === "") {
+        return item;
+      } else if (item.name.includes(value)) {
+        return item;
+      } else {
+        return null;
+      }
+    });
+  }, [filteredProducts, value]);
 
   function handleCategoryClick(item: ChipItemType) {
     setActiveCategory(
@@ -80,7 +72,7 @@ export default function Cards() {
   ) : (
     <Container>
       <Chips
-        items={categories.map((category: string) => ({
+        items={categories.map((category) => ({
           value: category,
           label: category,
         }))}
@@ -91,7 +83,7 @@ export default function Cards() {
         <Input
           onChange={handleChangeInput}
           value={value}
-          text={"Введіть артикул..."}
+          placeholder={"Введіть артикул..."}
           Icon={LoupeIcon}
         />
         {finalProducts.length === 0 ? (

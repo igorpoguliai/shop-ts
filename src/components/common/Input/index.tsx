@@ -2,20 +2,25 @@ import { InputWrapper, InputStyles } from "./styles";
 import { ChangeEventHandler } from "react";
 
 interface InputProps {
-  text: string;
+  placeholder: string;
   onChange: ChangeEventHandler<HTMLInputElement>;
   value: string;
   Icon: React.FunctionComponent<React.SVGAttributes<SVGElement>>;
 }
 
-export default function Input({ text, onChange, value, Icon }: InputProps) {
+export default function Input({
+  placeholder,
+  onChange,
+  value,
+  Icon,
+}: InputProps) {
   return (
     <InputWrapper>
       <InputStyles
         type="number"
         onChange={onChange}
         value={value}
-        placeholder={text}
+        placeholder={placeholder}
       />
       {Icon && <Icon />}
     </InputWrapper>
